@@ -1,6 +1,6 @@
 Note: use this two command in terminal to run the project
-. .\.venv\Scripts\Activate.ps1
-uvicorn backend.main:app --host 0.0.0.0 --port 8001 --app-dir .
+1).\.venv\Scripts\Activate.ps1
+2)uvicorn backend.main:app --host 0.0.0.0 --port 8001 --app-dir .
 
 
 
