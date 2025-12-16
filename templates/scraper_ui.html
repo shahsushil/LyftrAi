@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyftr AI Scraper UI</title>
+</head>
+<body>
+    <h1>Lyftr AI Universal Scraper Demo</h1>
+    <p>Submit a URL to scrape:</p>
+    
+    <form id="scrape-form" action="/scrape" method="POST">
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" placeholder="http://books.toscrape.com/" style="width: 400px;" required>
+        <button type="submit">Scrape</button>
+    </form>
+    
+    <hr>
+    <h3>Scrape Result</h3>
+    <pre id="result-output">Submit a URL to see the structured JSON output here...</pre>
+
+    <script>
+        document.getElementById('scrape-form').onsubmit = async function(e) {
+            e.preventDefault();
+            const urlInput = document.getElementById('url').value;
+            const output = document.getElementById('result-output');
+            output.textContent = "Scraping in progress... Please wait 30-60 seconds for complex sites.";
+
+            try {
+                const response = await fetch('/scrape', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: urlInput })
+                });
+
+                const result = await response.json();
+                output.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                output.textContent = `Error: ${error.message}`;
+            }
+        };
+    </script>
+</body>
+</html>

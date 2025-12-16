@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+pydantic
+httpx
+selectolax
+playwright
+# For HTML templating to serve React's index.html
+jinja2
